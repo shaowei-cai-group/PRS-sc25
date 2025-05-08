@@ -24,7 +24,7 @@ chmod +x build_PRS_images.sh
 ./build_PRS_images.sh
 ```
 
-for PRS-SC25-SBVA (image name: satcomp-sbva)
+for PRS-SC25-SBVA (image name: satcomp-prs-sbva)
 
 ```bash
 cd PRS-SC25-SBVA/
