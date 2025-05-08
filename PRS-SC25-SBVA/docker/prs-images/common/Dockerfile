@@ -25,6 +25,8 @@ RUN make -j
 
 WORKDIR /PRS
 RUN mkdir -p build
-WORKDIR /PRS/bulid
+WORKDIR /PRS/build
 RUN cmake ..
 RUN make -j
+
+WORKDIR /PRS

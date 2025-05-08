@@ -32,7 +32,7 @@ message(STATUS "YALSAT_SRC_DIR: ${YALSAT_SRC_DIR}")
 
 # 设置预编译库的路径
 set(KISSAT_STATIC_LIB "${KISSAT_SRC_DIR}/build/libkissat.a")
-set(M4RI_STATIC_LIB "${M4RI_SRC_DIR}/install/lib/libm4ri.a")
+set(M4RI_STATIC_LIB "${M4RI_SRC_DIR}/.libs/libm4ri.a")
 set(YALSAT_STATIC_LIB "${YALSAT_SRC_DIR}/libyals.a")
 
 # 包含库的头文件
