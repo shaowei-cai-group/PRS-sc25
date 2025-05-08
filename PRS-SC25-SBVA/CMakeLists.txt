@@ -60,6 +60,7 @@ ExternalProject_Add(
     CONFIGURE_COMMAND ./configure --prefix=${M4RI_SRC_DIR}/install
     BUILD_COMMAND make -j
     INSTALL_COMMAND make install
+    BUILD_BYPRODUCTS ${M4RI_STATIC_LIB}
 )
 
 # 配置 yalsat
@@ -123,6 +124,10 @@ add_custom_target(yalsat_static
     DEPENDS ${YALSAT_STATIC_LIB}
 )
 
+# 添加顺序依赖关系
+add_dependencies(m4ri_static kissat_static)
+add_dependencies(yalsat_static m4ri_static)
+
 # 包含库的头文件
 include_directories("${KISSAT_SRC_DIR}/src")
 include_directories("${M4RI_SRC_DIR}/install/include")
@@ -131,6 +136,6 @@ include_directories("${YALSAT_SRC_DIR}")
 # create main executable
 add_executable(prs ${SOURCES})
 
-# 链接静态库
+# 确保prs是最后一个构建的
 add_dependencies(prs kissat_static m4ri_static yalsat_static)
 target_link_libraries(prs ${KISSAT_STATIC_LIB} ${M4RI_STATIC_LIB} ${YALSAT_STATIC_LIB} Threads::Threads)
