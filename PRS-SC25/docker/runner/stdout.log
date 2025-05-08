@@ -1,0 +1,50 @@
+c ----------------------------------------- Paras list -------------------------------------------------
+c Name           	 Type    	 Now       	 Default   	 Comment
+c cutoff         	 double  	 5000.00   	 5000.0    	 cutoff time(seconds)
+c threads        	 int     	 32        	 32        	 threads
+c yalsat         	 int     	 1         	 1         	 use yalsat solver
+c share_lits     	 int     	 1500      	 1500      	 shared lits limit per thread per share_intv
+c share_intv     	 int     	 500       	 500       	 share interval(miliseconds)
+c share_grps     	 int     	 4         	 4         	 max share group size
+c mode           	 int     	 0         	 0         	 0 for PRS, 1 for SBVA
+c -----------------------------------------------------------------------------------------------------
+c mode PRS
+c read and preprocessing...
+c solving...
+c start local search init phase
+c preprocessing done
+c set best phase for solver 1, min_unsat: 0
+c set best phase for solver 2, min_unsat: 0
+c set best phase for solver 3, min_unsat: 0
+c set best phase for solver 4, min_unsat: 0
+c set best phase for solver 5, min_unsat: 0
+c set best phase for solver 6, min_unsat: 0
+c set best phase for solver 7, min_unsat: 0
+c set best phase for solver 8, min_unsat: 0
+c set best phase for solver 9, min_unsat: 0
+c set best phase for solver 10, min_unsat: 0
+c set best phase for solver 11, min_unsat: 0
+c set best phase for solver 12, min_unsat: 0
+c set best phase for solver 13, min_unsat: 0
+c set best phase for solver 14, min_unsat: 0
+c set best phase for solver 15, min_unsat: 0
+c set best phase for solver 16, min_unsat: 0
+c set best phase for solver 17, min_unsat: 0
+c set best phase for solver 18, min_unsat: 0
+c set best phase for solver 19, min_unsat: 0
+c set best phase for solver 20, min_unsat: 0
+c set best phase for solver 21, min_unsat: 0
+c set best phase for solver 22, min_unsat: 0
+c set best phase for solver 23, min_unsat: 0
+c set best phase for solver 24, min_unsat: 0
+c set best phase for solver 25, min_unsat: 0
+c set best phase for solver 26, min_unsat: 0
+c set best phase for solver 27, min_unsat: 0
+c set best phase for solver 28, min_unsat: 0
+c set best phase for solver 29, min_unsat: 0
+c set best phase for solver 30, min_unsat: 0
+c set best phase for solver 31, min_unsat: 0
+c num_solvers: 32, num_sat_group: 11, num_unsat_group: 9, num_default_group: 12
+c problem solved by thread 0
+s SATISFIABLE
+v 1 2 3 0

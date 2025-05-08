@@ -1,0 +1,16 @@
+# 编译生成的文件和目录
+*.o
+*.lo
+*.la
+*.so
+*.so.*
+*.a
+*.lib
+.libs/
+.deps/
+.dirstamp
+
+# 临时文件
+*~
+.*.swp
+.DS_Store
