@@ -10,6 +10,20 @@ RUN apt install -y libboost-all-dev
 WORKDIR /
 COPY / /PRS
 
+
+WORKDIR /PRS/third_party/kissat-inc
+RUN ./configure --quiet
+RUN make -j
+
+
+WORKDIR /PRS/third_party/m4ri-20140914
+RUN ./configure
+RUN make -j
+
+WORKDIR /PRS/third_party/yalsat
+RUN ./configure.sh
+RUN make -j
+
 WORKDIR /PRS
 RUN mkdir -p build
 WORKDIR /PRS/bulid
