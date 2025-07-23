@@ -124,8 +124,9 @@ int PRS::mix_solve(const char* filename) {
     // 已经在前面调用过configure_solvers，这里无需再次调用
     // configure_solvers();
 
-    sbva_future = std::async(std::launch::async, [this, &pp, nbSbvaKissat, nbSbvaYalsat]() {
-        return pp.do_sbva_preprocess(sbva_timeout, nbSbvaKissat + nbSbvaYalsat); // 原函数不接受超时参数
+    res = 0;
+    sbva_future = std::async(std::launch::async, [this, &pp, nbSbvaKissat, nbSbvaYalsat, &res]() {
+        return pp.do_sbva_preprocess(sbva_timeout, nbSbvaKissat + nbSbvaYalsat, res); // 原函数不接受超时参数
     });
 
     // 设置SBVA超时
@@ -133,7 +134,7 @@ int PRS::mix_solve(const char* filename) {
 
     int completed_thread = -1;
     bool any_success = false;
-    res = 0;
+    
     bool sbva_completed = false;
     preprocess* pre = pp.get_preprocess();
 
@@ -300,6 +301,8 @@ int PRS::mix_solve(const char* filename) {
     
     // 终止所有求解器
     printf("c terminating all solvers...\n");
+
+    // printf("killing kissat\n");
     
     // 终止Kissat求解器
     for (int i = 0; i < nbKissat; i++) {
@@ -307,6 +310,8 @@ int PRS::mix_solve(const char* filename) {
             solvers[i]->terminate();
         }
     }
+
+    // printf("killing yalsat\n");
     
     // 终止Yalsat求解器
     for (int i = 0; i < nbYalsat; i++) {
@@ -340,7 +345,11 @@ int PRS::mix_solve(const char* filename) {
         }
     }
 
-    // printf("kill done\n");
+    printf("c wait for sbva\n");
+
+    sbva_future.wait();
+
+    printf("c kill done %d\n", res);
 
     // 处理SAT结果，映射到原始变量
     if (res == 10) {
@@ -355,7 +364,6 @@ int PRS::mix_solve(const char* filename) {
         }
     }
 
-    
     // 释放求解器资源
     // printf("c cleaning up solver resources...\n");
     

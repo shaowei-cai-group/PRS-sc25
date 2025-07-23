@@ -59,7 +59,7 @@ public:
         }
     }
 
-    int do_sbva_preprocess(int timeout, int num_sbva_threads) {
+    int do_sbva_preprocess(int timeout, int num_sbva_threads, int &res) {
         if(pre->clauses < 1e8) {
             //copy clauses
             for(int i=1; i<pre->clause.size(); i++) {
@@ -106,13 +106,19 @@ public:
                 while(!timeout_reached.load() && 
                       std::chrono::system_clock::now() - start < timeout_t) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                    if(res != 0) {
+                        printf("c sbva cancelled because of formula solved %d\n", res);
+                        for(auto& sbva : sbva_instances) {
+                            sbva->setInterrupt();
+                        }
+                        break;
+                    }
                 }
                 
                 // 如果超时且还有线程在运行，中断它们
                 if(std::chrono::system_clock::now() - start >= timeout_t) {
                     timeout_reached.store(true);
                     printf("c sbva timeout after %d seconds, interrupting\n", timeout);
-                    
                     for(auto& sbva : sbva_instances) {
                         sbva->setInterrupt();
                     }
