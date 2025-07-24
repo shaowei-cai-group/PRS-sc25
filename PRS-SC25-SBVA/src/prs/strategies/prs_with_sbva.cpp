@@ -28,12 +28,19 @@ int PRS::mix_solve(const char* filename) {
         return 10;
     }
 
+    bool big_instance = false;
+
     if (pp.get_preprocess()->clauses > 33554431) {
         printf("c too many clauses, yalsat not used\n");
         nbPrsYalsat = 0;
         nbSbvaYalsat = 0;
         nbPrsKissat += 1;
         nbSbvaKissat += 1;
+        nbYalsat = 0;
+
+        nbPrsKissat += nbSbvaKissat;
+        nbSbvaKissat = 0;
+        nbKissat = nbPrsKissat;
     }
 
     printf("c create solver instances ...\n");
