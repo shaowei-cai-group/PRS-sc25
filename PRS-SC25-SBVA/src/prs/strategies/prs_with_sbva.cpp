@@ -347,7 +347,11 @@ int PRS::mix_solve(const char* filename) {
 
     printf("c wait for sbva\n");
 
-    sbva_future.wait();
+    if (sbva_future.valid()) {     // 只有尚未 get() 过才等待
+        sbva_future.wait();
+    }
+
+    printf("c sbva done %d\n", res);
 
     printf("c kill done %d\n", res);
 
